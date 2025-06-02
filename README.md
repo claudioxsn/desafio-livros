@@ -4,7 +4,8 @@ Este projeto é um sistema de gerenciamento de livros, autores e assuntos. Ele f
 -   Organização em camadas   
 -   Banco de dados relacional com uso de views, triggers e procedures
 -   Interface via API e também Livewire (Web)
--   Filtros, relações N:N e soft deletes. 
+-   Filtros, relações N:N e soft deletes.
+-   Testes
 
 ## Relatório Técnico do Projeto
 
@@ -29,7 +30,8 @@ O projeto foi estruturado em camadas para garantir manutenção e separação de
 - CRUD via API + Livewire
 - Form Requests
 - Soft Deletes
-- View SQL para consulta. 
+- View SQL para consulta.
+- Testes 
 
 ## Banco de Dados
 
@@ -50,6 +52,7 @@ O projeto foi estruturado em camadas para garantir manutenção e separação de
 -   Segue padrões modernos de arquitetura Laravel.
 -   O uso de SoftDeletes adiciona robustez e segurança.
 -   O banco está preparado com view para extração de relatório.
+-   O projeto conta com testes automatizados.
 
 
 # Execução do Projeto com Laravel Sail
