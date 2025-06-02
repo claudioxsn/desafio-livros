@@ -16,7 +16,7 @@ class AssuntoRepository extends AbstractRepository
 
     public function buscarPorId($id)
     {
-        $assunto = Assunto::find($id);
+        $assunto = $this->model()::find($id);
 
         if (!$assunto) {
             throw new ModelNotFoundException("Assunto com ID {$id} não encontrado");
@@ -33,7 +33,7 @@ class AssuntoRepository extends AbstractRepository
     public function criar(array $dados)
     {
         try {
-            return Assunto::create($dados);
+            return $this->model()::create($dados);
         } catch (\Illuminate\Database\QueryException $e) {
             throw new DatabaseException('Erro ao criar assunto: ' . $e->getMessage());
         }
@@ -42,7 +42,7 @@ class AssuntoRepository extends AbstractRepository
     public function atualizar($id, array $dados)
     {
         try {
-            $assunto = Assunto::findOrFail($id);
+            $assunto = $this->model()::findOrFail($id);
             $assunto->update($dados);
             return $assunto;
         } catch (\Illuminate\Database\QueryException $e) {
@@ -53,7 +53,7 @@ class AssuntoRepository extends AbstractRepository
     public function deletar($id)
     {
         try {
-            $assunto = Assunto::findOrFail($id);
+            $assunto = $this->model()::findOrFail($id);
             $assunto->delete();
             return $assunto;
         } catch (\Illuminate\Database\QueryException $e) {
@@ -64,7 +64,7 @@ class AssuntoRepository extends AbstractRepository
     public function restore($id)
     {
         try {
-            $assunto = Assunto::withTrashed()->findOrFail($id);
+            $assunto = $this->model()::withTrashed()->findOrFail($id);
             $assunto->restore();
             return $assunto;
         } catch (\Illuminate\Database\QueryException $e) {

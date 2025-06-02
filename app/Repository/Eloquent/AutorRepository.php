@@ -16,7 +16,7 @@ class AutorRepository extends AbstractRepository
 
     public function buscarPorId($id)
     {
-        $autor = Autor::find($id);
+        $autor = $this->model()::find($id);
 
         if (!$autor) {
             throw new ModelNotFoundException("Autor com ID {$id} não encontrado");
@@ -33,7 +33,7 @@ class AutorRepository extends AbstractRepository
     public function criar(array $dados)
     {
         try {
-            return Autor::create($dados);
+            return $this->model()::create($dados);
         } catch (\Illuminate\Database\QueryException $e) {
             throw new DatabaseException('Erro ao criar autor: ' . $e->getMessage());
         }
@@ -42,7 +42,7 @@ class AutorRepository extends AbstractRepository
     public function atualizar($id, array $dados)
     {
         try {
-            $autor = Autor::findOrFail($id);
+            $autor = $this->model()::findOrFail($id);
             $autor->update($dados);
             return $autor;
         } catch (\Illuminate\Database\QueryException $e) {
