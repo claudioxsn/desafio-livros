@@ -1,0 +1,624 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentação da API",
+        "description": "API do sistema de livros com autores e assuntos",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/assuntos": {
+            "get": {
+                "tags": [
+                    "Assuntos"
+                ],
+                "summary": "Lista todos os assuntos",
+                "operationId": "d508d3604432e32082c9f627ffd78c66",
+                "responses": {
+                    "200": {
+                        "description": "Lista de assuntos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Assunto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro no banco de dados"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Assuntos"
+                ],
+                "summary": "Cria um novo assunto",
+                "operationId": "af3c6b92c90b765ccc4e3cd5dfb28ecd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Assunto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Assunto criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Assunto"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro ao criar assunto"
+                    }
+                }
+            }
+        },
+        "/api/assuntos/{id}": {
+            "get": {
+                "tags": [
+                    "Assuntos"
+                ],
+                "summary": "Exibe um assunto específico",
+                "operationId": "4c0ede525e9d464f2ce8abeaf7c25881",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do assunto",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Assunto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Assunto não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro ao buscar assunto"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Assuntos"
+                ],
+                "summary": "Atualiza um assunto",
+                "operationId": "dce96c0047f080f7699e13d213c666ae",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Assunto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Assunto atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Assunto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Assunto não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro ao atualizar assunto"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Assuntos"
+                ],
+                "summary": "Deleta um assunto",
+                "operationId": "89bb3841a5762d0a790496a61be2cecd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Assunto deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Assunto não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro ao deletar assunto"
+                    }
+                }
+            }
+        },
+        "/api/assuntos/{id}/restore": {
+            "post": {
+                "tags": [
+                    "Assuntos"
+                ],
+                "summary": "Restaura um assunto deletado",
+                "operationId": "19f843ba4345ec4de87b21dce8e90180",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Assunto restaurado com sucesso"
+                    },
+                    "500": {
+                        "description": "Erro ao restaurar assunto"
+                    }
+                }
+            }
+        },
+        "/api/autores": {
+            "get": {
+                "tags": [
+                    "Autores"
+                ],
+                "summary": "Listar todos os autores",
+                "operationId": "347c686fedd9f10a6e78a12949be3ca9",
+                "responses": {
+                    "200": {
+                        "description": "Lista de autores"
+                    },
+                    "500": {
+                        "description": "Erro no banco de dados"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Autores"
+                ],
+                "summary": "Cadastrar novo autor",
+                "operationId": "bc9bd4b13f84f2b5568af1b097c49d48",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "José de Alencar"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Autor criado"
+                    },
+                    "500": {
+                        "description": "Erro no banco de dados"
+                    }
+                }
+            }
+        },
+        "/api/autores/{id}": {
+            "get": {
+                "tags": [
+                    "Autores"
+                ],
+                "summary": "Buscar autor por ID",
+                "operationId": "6b2991c080fb6648833fcb7c228ed6ca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Autor encontrado"
+                    },
+                    "404": {
+                        "description": "Autor não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro no banco de dados"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Autores"
+                ],
+                "summary": "Atualizar autor",
+                "operationId": "d0d0240eed97829dce493e55f260a517",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Machado de Assis"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Autor atualizado"
+                    },
+                    "404": {
+                        "description": "Autor não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro no banco de dados"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Autores"
+                ],
+                "summary": "Excluir autor",
+                "operationId": "b0813df643eb3cd9c506960d663f5891",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Autor deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Autor não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro no banco de dados"
+                    }
+                }
+            }
+        },
+        "/api/autores/{id}/restore": {
+            "post": {
+                "tags": [
+                    "Autores"
+                ],
+                "summary": "Restaurar autor deletado",
+                "operationId": "fd92a1364ccc678a9aa5a47231334f1c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Autor restaurado com sucesso"
+                    },
+                    "500": {
+                        "description": "Erro no banco de dados"
+                    }
+                }
+            }
+        },
+        "/api/livros": {
+            "get": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Listar todos os livros",
+                "operationId": "51d7d7a1686131c730645b6eac9264e5",
+                "responses": {
+                    "200": {
+                        "description": "Lista de livros"
+                    },
+                    "500": {
+                        "description": "Erro no servidor"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Criar um novo livro",
+                "operationId": "d557d66d9220fabae0f1162790ba75ab",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Livro"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Livro criado com sucesso"
+                    },
+                    "500": {
+                        "description": "Erro ao criar livro"
+                    }
+                }
+            }
+        },
+        "/api/livros/{id}": {
+            "get": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Exibir um livro específico",
+                "operationId": "8787ef95fa71eda85f873a1f28df4b87",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do livro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Livro encontrado"
+                    },
+                    "404": {
+                        "description": "Livro não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Atualizar um livro",
+                "operationId": "9fcc13da3da7d6182f338f6a2dddfab4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do livro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Livro"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Livro atualizado com sucesso"
+                    },
+                    "500": {
+                        "description": "Erro ao atualizar livro"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Deletar um livro",
+                "operationId": "16da593563224791d37c53d0eeb34c42",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do livro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Livro deletado com sucesso"
+                    },
+                    "500": {
+                        "description": "Erro ao deletar livro"
+                    }
+                }
+            }
+        },
+        "/api/livros/{id}/restore": {
+            "post": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Restaurar um livro deletado",
+                "operationId": "22d53aa1a78a4ed8dffdf681652de1c0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do livro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Livro restaurado com sucesso"
+                    },
+                    "500": {
+                        "description": "Erro ao restaurar livro"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Livro": {
+                "title": "Livro",
+                "required": [
+                    "titulo",
+                    "autor_id",
+                    "assunto_id"
+                ],
+                "properties": {
+                    "titulo": {
+                        "type": "string",
+                        "example": "O Senhor dos Anéis"
+                    },
+                    "autor_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "assunto_id": {
+                        "type": "integer",
+                        "example": 3
+                    }
+                },
+                "type": "object"
+            },
+            "Assunto": {
+                "title": "Assunto",
+                "required": [
+                    "id",
+                    "nome"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nome": {
+                        "type": "string",
+                        "example": "Filosofia"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-06-01T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-06-01T12:00:00Z"
+                    },
+                    "deleted_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": null,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Assuntos",
+            "description": "Assuntos"
+        },
+        {
+            "name": "Autores",
+            "description": "Autores"
+        },
+        {
+            "name": "Livros",
+            "description": "Livros"
+        }
+    ]
+}
