@@ -55,7 +55,7 @@ O projeto foi estruturado em camadas para garantir manutenção e separação de
 # Execução do Projeto com Laravel Sail
 
 #### Clonar Repositório
-- git clone https://github.com/claudioxsn/desafio-crud-livros.git
+- git clone https://github.com/claudioxsn/desafio-livros.git
 - cd desafio-crud-livros
 
 #### Instalar as dependências do projeto
