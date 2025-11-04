@@ -59,7 +59,7 @@ O projeto foi estruturado em camadas para garantir manutenção e separação de
 
 #### Clonar Repositório
 - git clone https://github.com/claudioxsn/desafio-livros.git
-- cd desafio-crud-livros
+- cd desafio-livros
 
 #### Instalar as dependências do projeto
 - composer update
