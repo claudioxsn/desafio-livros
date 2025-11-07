@@ -11,7 +11,7 @@ class AssuntoIndex extends Component
 
     public function delete(AssuntoService $assuntoService, $codAs)
     {
-        $deleted = $assuntoService->deletar($codAs);
+        $deleted = $assuntoService->delete($codAs);
 
         if (!$deleted) {
             session()->flash('error', 'Assunto não encontrado ou não pode ser deletado');
@@ -25,9 +25,9 @@ class AssuntoIndex extends Component
     public function render(AssuntoService $assuntoService)
     {
         if ($this->search) {
-            $assuntos = $assuntoService->listarPorNomeComPagination($this->search);
+            $assuntos = $assuntoService->findByNameWithPagination($this->search);
         } else {
-            $assuntos = $assuntoService->listarTodosWithPagination();
+            $assuntos = $assuntoService->listAllWithPagination();
         }
 
         return view('livewire.assunto.assunto-index', compact('assuntos'));

@@ -27,7 +27,7 @@ class AutorCreate extends Component
         $this->validate();
 
         try {
-            $autorService->criar([
+            $autorService->create([
                 'Nome' => $this->Nome
             ]);
             session()->flash('success', 'Autor cadastrado com sucesso!');

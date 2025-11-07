@@ -41,7 +41,7 @@ class LivroController extends Controller
      */
     public function index()
     {
-        $livros = $this->livroService->listarTodos();
+        $livros = $this->livroService->listAll();
         return response()->json($livros);
     }
 
@@ -61,7 +61,7 @@ class LivroController extends Controller
     public function store(LivroRequest $request)
     {
         try {
-            $livro = $this->livroService->criar($request->all());
+            $livro = $this->livroService->create($request->all());
             return response()->json($livro, 201);
         } catch (DatabaseException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -87,7 +87,7 @@ class LivroController extends Controller
     public function show($id)
     {
         try {
-            $livro = $this->livroService->buscarPorId($id);
+            $livro = $this->livroService->findById($id);
             return response()->json($livro);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => $e->getMessage()], 404);
@@ -118,7 +118,7 @@ class LivroController extends Controller
     public function update(LivroRequest $request, $id)
     {
         try {
-            $livro = $this->livroService->atualizar($id, $request->all());
+            $livro = $this->livroService->update($id, $request->all());
             return response()->json($livro);
         } catch (DatabaseException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -144,7 +144,7 @@ class LivroController extends Controller
     public function destroy($id)
     {
         try {
-            $this->livroService->deletar($id);
+            $this->livroService->delete($id);
             return response()->json(['message' => 'Livro deletado com sucesso']);
         } catch (DatabaseException $e) {
             return response()->json(['error' => $e->getMessage()], 500);

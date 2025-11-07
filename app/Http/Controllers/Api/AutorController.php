@@ -37,7 +37,7 @@ class AutorController extends Controller
     public function index()
     {
         try {
-            $autores = $this->autorService->listarTodos();
+            $autores = $this->autorService->listAll();
             return response()->json($autores);
         } catch (DatabaseException $e) {
             return response()->json(['error' => 'Erro no banco de dados: ' . $e->getMessage()], 500);
@@ -63,7 +63,7 @@ class AutorController extends Controller
     public function store(AutorRequest $request)
     {
         try {
-            $autor = $this->autorService->criar($request->all());
+            $autor = $this->autorService->create($request->all());
             return response()->json($autor, 201);
         } catch (DatabaseException $e) {
             return response()->json(['error' => 'Erro no banco de dados: ' . $e->getMessage()], 500);
@@ -88,7 +88,7 @@ class AutorController extends Controller
     public function show(string $id)
     {
         try {
-            $autor = $this->autorService->buscarPorId($id);
+            $autor = $this->autorService->findById($id);
             return response()->json($autor);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => $e->getMessage()], 404);
@@ -122,7 +122,7 @@ class AutorController extends Controller
     public function update(AutorRequest $request, $id)
     {
         try {
-            $autor = $this->autorService->atualizar($id, $request->all());
+            $autor = $this->autorService->update($id, $request->all());
             return response()->json($autor);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Autor não encontrado'], 404);
@@ -150,13 +150,13 @@ class AutorController extends Controller
     public function destroy(string $id)
     {
         try {
-            $autor = $this->autorService->deletar($id);
+            $autor = $this->autorService->delete($id);
 
             if (!$autor) {
                 return response()->json(['error' => 'Autor não encontrado'], 404);
             }
 
-            return response()->json(['mensagem' => 'Autor deletado com sucesso']);
+            return response()->json(['mensagem' => 'Autor deletado com sucesso'], 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         } catch (DatabaseException $e) {

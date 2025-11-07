@@ -21,7 +21,6 @@ abstract class AbstractRepository implements RepositoryInterface
         return app($this->model());
     }
 
-
     public function all()
     {
         return $this->model->all();
@@ -45,7 +44,13 @@ abstract class AbstractRepository implements RepositoryInterface
     public function update($id, array $data)
     {
         $record = $this->find($id);
+
+        if (!$record) {
+            throw new \Exception("Registro não encontrado para atualização");
+        }
+
         $record->update($data);
+
         return $record;
     }
 

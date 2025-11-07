@@ -16,7 +16,7 @@ class AutorEdit extends Component
     public function mount(AutorService $autorService, $CodAu)
     {
         try {
-            $autor = $autorService->buscarPorId($CodAu);
+            $autor = $autorService->findById($CodAu);
             $this->CodAu = $autor->CodAu;
             $this->Nome = $autor->Nome;
         } catch (ModelNotFoundException $e) {
@@ -40,7 +40,7 @@ class AutorEdit extends Component
         $this->validate();
 
         try {
-            $autorService->atualizar($this->CodAu, ['Nome' => $this->Nome]);
+            $autorService->update($this->CodAu, ['Nome' => $this->Nome]);
 
             session()->flash('success', 'Autor atualizado com sucesso!');
             return redirect()->route('autor.index');

@@ -64,7 +64,7 @@ class LivroEdit extends Component
 
     public function mount(LivroService $livroService, $Codl)
     {
-        $livro = $livroService->buscarPorId($Codl);
+        $livro = $livroService->findById($Codl);
 
         if (!$livro) {
             return redirect()->route('livro.index')->with(['error' => 'Livro não encontrado']);
@@ -82,13 +82,13 @@ class LivroEdit extends Component
 
     public function salvar(LivroService $livroService)
     {
-        $livro = $livroService->buscarPorId($this->Codl);
+        $livro = $livroService->findById($this->Codl);
 
         if (!$livro) {
             return redirect()->route('livro.index')->with(['error' => 'Livro não encontrado']);
         }
 
-        $livroService->atualizar($this->Codl, [
+        $livroService->update($this->Codl, [
             'Titulo' => $this->Titulo,
             'Editora' => $this->Editora,
             'Edicao' => $this->Edicao,
@@ -103,8 +103,8 @@ class LivroEdit extends Component
 
     public function render(AutorService $autorService, AssuntoService $assuntoService)
     {
-        $autores = $autorService->listarTodos();
-        $assuntos = $assuntoService->listarTodos();
+        $autores = $autorService->listAll();
+        $assuntos = $assuntoService->listAll();
         return view('livewire.livro.livro-edit', compact('autores', 'assuntos'));
     }
 }

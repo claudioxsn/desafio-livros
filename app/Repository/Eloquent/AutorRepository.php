@@ -14,7 +14,7 @@ class AutorRepository extends AbstractRepository
         return Autor::class;
     }
 
-    public function buscarPorId($id)
+    public function findById($id)
     {
         $autor = $this->model()::find($id);
 
@@ -25,12 +25,12 @@ class AutorRepository extends AbstractRepository
         return $autor;
     }
 
-    public function buscarPorNomeComPagination($nome, $qtd)
+    public function findByNameWithPagination($nome, $qtd)
     {
         return $this->model->where('Nome', 'like', "%$nome%")->paginate($qtd);
     }
 
-    public function criar(array $dados)
+    public function create(array $dados)
     {
         try {
             return $this->model()::create($dados);
@@ -39,7 +39,7 @@ class AutorRepository extends AbstractRepository
         }
     }
 
-    public function atualizar($id, array $dados)
+    public function update($id, array $dados)
     {
         try {
             $autor = $this->model()::findOrFail($id);
@@ -50,7 +50,7 @@ class AutorRepository extends AbstractRepository
         }
     }
 
-    public function deletar($id)
+    public function delete($id)
     {
         try {
             $autor = Autor::findOrFail($id);

@@ -10,7 +10,7 @@ class LivroIndex extends Component
     public $search = ''; 
     public function delete(LivroService $livroService, $Codl)
     {
-        $livro = $livroService->deletar($Codl);
+        $livro = $livroService->delete($Codl);
 
         if (!$livro) {
             session()->flash('error', 'Livro não encontrado ou não pode ser excluído.');
@@ -26,7 +26,7 @@ class LivroIndex extends Component
         if ($this->search) {
             $livros = $livroService->listarLivrosPorTituloComPagination($this->search);
         } else {
-            $livros = $livroService->listarTodosWithPagination();
+            $livros = $livroService->listAllWithPagination();
         }
         return view('livewire.livro.livro-index', compact('livros'));
     }

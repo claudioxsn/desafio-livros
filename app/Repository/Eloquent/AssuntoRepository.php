@@ -6,6 +6,7 @@ use App\Exceptions\DatabaseException;
 use App\Exceptions\ModelNotFoundException;
 use App\Models\Assunto;
 use App\Repository\Eloquent\AbstractRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException as EloquentNotFoundException;
 
 class AssuntoRepository extends AbstractRepository
 {
@@ -14,23 +15,21 @@ class AssuntoRepository extends AbstractRepository
         return Assunto::class;
     }
 
-    public function buscarPorId($id)
+    public function findById($id)
     {
-        $assunto = $this->model()::find($id);
-
-        if (!$assunto) {
+        try {
+            return $this->model()::findOrFail($id);
+        } catch (EloquentNotFoundException $e) {
             throw new ModelNotFoundException("Assunto com ID {$id} não encontrado");
         }
-
-        return $assunto;
     }
 
-    public function buscarPorDescricaoComPagination($descricao, $qtd)
+    public function findByDescriptionWithPagination($descricao, $qtd)
     {
         return $this->model->where('Descricao', 'like', "%$descricao%")->paginate($qtd);
     }
 
-    public function criar(array $dados)
+    public function create(array $dados)
     {
         try {
             return $this->model()::create($dados);
@@ -39,7 +38,7 @@ class AssuntoRepository extends AbstractRepository
         }
     }
 
-    public function atualizar($id, array $dados)
+    public function update($id, array $dados)
     {
         try {
             $assunto = $this->model()::findOrFail($id);
@@ -50,7 +49,7 @@ class AssuntoRepository extends AbstractRepository
         }
     }
 
-    public function deletar($id)
+    public function delete($id)
     {
         try {
             $assunto = $this->model()::findOrFail($id);
