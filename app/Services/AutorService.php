@@ -16,56 +16,56 @@ class AutorService
         $this->autorRepository = $autorRepository;
     }
 
-    public function listarTodos()
+    public function listAll()
     {
         return $this->autorRepository->all();
     }
 
-    public function listarTodosWithPagination()
+    public function listAllWithPagination()
     {
         return $this->autorRepository->allWithPagination(8); // 8 autores por página
     }
 
-    public function listarAutoresPorNomeComPagination($nome)
+    public function listAuthorsByNameWithPagination($nome)
     {
-        return $this->autorRepository->buscarPorNomeComPagination($nome, 8); // 8 autores por página
+        return $this->autorRepository->findByNameWithPagination($nome, 8); // 8 autores por página
     }
 
-    public function buscarPorId($id)
+    public function findById($id)
     {
           try {
-            return $this->autorRepository->buscarPorId($id);
+            return $this->autorRepository->findById($id);
         } catch (ModelNotFoundException $e) {
             throw new ModelNotFoundException($e->getMessage());
         }
     }
 
-    public function criar(array $dados)
+    public function create(array $dados)
     {
         try {
             return DB::transaction(function () use ($dados) {
-                return $this->autorRepository->criar($dados);
+                return $this->autorRepository->create($dados);
             });
         } catch (DatabaseException $e) {
             throw $e;  
         }
     }
 
-    public function atualizar($id, array $dados)
+    public function update($id, array $dados)
     {
         try {
             return DB::transaction(function () use ($id, $dados) {
-                return $this->autorRepository->atualizar($id, $dados);
+                return $this->autorRepository->update($id, $dados);
             });
         } catch (DatabaseException $e) {
             throw $e; 
         }
     }
 
-    public function deletar($id)
+    public function delete($id)
     {
         try {
-            $autor = $this->autorRepository->deletar($id);
+            $autor = $this->autorRepository->delete($id);
             return $autor;
         } catch (ModelNotFoundException $e) {
             throw $e; 

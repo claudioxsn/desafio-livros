@@ -38,7 +38,7 @@ class AssuntoController extends Controller
     public function index()
     {
         try {
-            $assuntos = $this->assuntoService->listarTodos();
+            $assuntos = $this->assuntoService->listAll();
             return response()->json($assuntos);
         } catch (DatabaseException $e) {
             return response()->json(['error' => 'Erro no banco de dados: ' . $e->getMessage()], 500);
@@ -68,7 +68,7 @@ class AssuntoController extends Controller
     public function store(AssuntoRequest $request)
     {
         try {
-            $assunto = $this->assuntoService->criar($request->all());
+            $assunto = $this->assuntoService->create($request->all());
             return response()->json($assunto, 201);
         } catch (DatabaseException $e) {
             return response()->json(['error' => 'Erro ao criar assunto: ' . $e->getMessage()], 500);
@@ -104,7 +104,7 @@ class AssuntoController extends Controller
     public function show($id)
     {
         try {
-            $assunto = $this->assuntoService->buscarPorId($id);
+            $assunto = $this->assuntoService->findById($id);
             return response()->json($assunto);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => $e->getMessage()], 404);
@@ -146,7 +146,7 @@ class AssuntoController extends Controller
     public function update(AssuntoRequest $request, $id)
     {
         try {
-            $assunto = $this->assuntoService->atualizar($id, $request->all());
+            $assunto = $this->assuntoService->update($id, $request->all());
             return response()->json($assunto);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Assunto não encontrado'], 404);
@@ -183,7 +183,7 @@ class AssuntoController extends Controller
     public function destroy($id)
     {
         try {
-            $assunto = $this->assuntoService->deletar($id);
+            $assunto = $this->assuntoService->delete($id);
 
             if (!$assunto) {
                 return response()->json(['error' => 'Assunto não encontrado'], 404);

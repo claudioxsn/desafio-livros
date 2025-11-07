@@ -26,7 +26,7 @@ class AssuntoCreate extends Component
         $this->validate();
 
         try {
-            $assuntoService->criar([
+            $assuntoService->create([
                 'Descricao' => $this->Descricao
             ]);
 

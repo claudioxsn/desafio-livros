@@ -68,7 +68,7 @@ class LivroCreate extends Component
         $this->validate();
 
         try {
-            $livroService->criar([
+            $livroService->create([
                 'Titulo' => $this->Titulo,
                 'Editora' => $this->Editora,
                 'Edicao' => $this->Edicao,
@@ -91,8 +91,8 @@ class LivroCreate extends Component
 
     public function render(AutorService $autorService, AssuntoService $assuntoService)
     {
-        $autores = $autorService->listarTodos();
-        $assuntos = $assuntoService->listarTodos();
+        $autores = $autorService->listAll();
+        $assuntos = $assuntoService->listAll();
 
         return view('livewire.livro.livro-create', compact('autores', 'assuntos'));
     }

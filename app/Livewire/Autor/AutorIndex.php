@@ -12,7 +12,7 @@ class AutorIndex extends Component
 
     public function delete(AutorService $autorService, $CodAu)
     {
-        $autorDeletado = $autorService->deletar($CodAu);
+        $autorDeletado = $autorService->delete($CodAu);
 
         if (!$autorDeletado) {
             session()->flash('error', 'Autor não encontrado ou não pode ser deletado');
@@ -26,9 +26,9 @@ class AutorIndex extends Component
     public function render(AutorService $autorService)
     {
         if ($this->search) {
-            $autores = $autorService->listarAutoresPorNomeComPagination($this->search);
+            $autores = $autorService->listAuthorsByNameWithPagination($this->search);
         } else {
-            $autores = $autorService->listarTodosWithPagination();
+            $autores = $autorService->listAllWithPagination();
         }
 
         return view('livewire.autor.autor-index', compact('autores'));

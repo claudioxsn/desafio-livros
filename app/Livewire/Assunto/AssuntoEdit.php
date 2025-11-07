@@ -14,7 +14,7 @@ class AssuntoEdit extends Component
     public function mount(AssuntoService $assuntoService, $codAs)
     {
         try {
-            $assunto = $assuntoService->buscarPorId($codAs);
+            $assunto = $assuntoService->findById($codAs);
             $this->codAs = $assunto->codAs;
             $this->Descricao = $assunto->Descricao;
         } catch (ModelNotFoundException $e) {
@@ -40,7 +40,7 @@ class AssuntoEdit extends Component
         $this->validate();
 
         try {
-            $assuntoService->atualizar($this->codAs, ['Descricao' => $this->Descricao]);
+            $assuntoService->update($this->codAs, ['Descricao' => $this->Descricao]);
             session()->flash('success', 'Assunto atualizado com sucesso!');
             return redirect()->route('assunto.index');
         } catch (\Exception $e) {

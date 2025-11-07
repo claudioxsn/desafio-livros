@@ -14,7 +14,7 @@ class LivroRepository extends AbstractRepository
         return Livro::class;
     }
 
-    public function buscarPorId($id)
+    public function findById($id)
     {
         $livro = $this->model()::find($id);
 
@@ -30,7 +30,7 @@ class LivroRepository extends AbstractRepository
         return $this->model()::where('Titulo', 'like', "%$titulo%")->paginate($qtd);
     }
 
-    public function criar(array $dados)
+    public function create(array $dados)
     {
         try {
             return $this->model()::create($dados);
@@ -39,7 +39,7 @@ class LivroRepository extends AbstractRepository
         }
     }
 
-    public function atualizar($id, array $dados)
+    public function update($id, array $dados)
     {
         try {
             $livro = $this->model()::findOrFail($id);
@@ -50,7 +50,7 @@ class LivroRepository extends AbstractRepository
         }
     }
 
-    public function deletar($id)
+    public function delete($id)
     {
         try {
             $livro = $this->model()::findOrFail($id);

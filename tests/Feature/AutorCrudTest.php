@@ -11,7 +11,7 @@ class AutorCrudTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function pode_criar_um_autor()
+    public function test_can_create_author()
     {
         $response = $this->postJson('/api/autores', [
             'Nome' => 'Autor Teste'
@@ -21,7 +21,7 @@ class AutorCrudTest extends TestCase
         $this->assertDatabaseHas('Autor', ['Nome' => 'Autor Teste']);
     }
 
-    public function pode_listar_autores()
+    public function test_test_can_list_authors()
     {
         Autor::factory()->count(3)->create();
 
@@ -31,7 +31,7 @@ class AutorCrudTest extends TestCase
         $response->assertJsonCount(3);
     }
 
-    public function pode_atualizar_um_autor()
+    public function test_test_can_update_author()
     {
         $autor = Autor::factory()->create(['Nome' => 'Antigo Nome']);
 
@@ -43,7 +43,7 @@ class AutorCrudTest extends TestCase
         $this->assertDatabaseHas('Autor', ['CodAu' => $autor->CodAu, 'Nome' => 'Novo Nome']);
     }
 
-    public function pode_deletar_um_autor()
+    public function test_can_delete_author()
     {
         $autor = Autor::factory()->create();
 

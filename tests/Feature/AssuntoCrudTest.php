@@ -11,7 +11,7 @@ class AssuntoCrudTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_pode_criar_um_assunto()
+    public function test_can_create_subject()
     {
         $assunto = Assunto::factory()->create();
 
@@ -20,7 +20,7 @@ class AssuntoCrudTest extends TestCase
         ]);
     }
 
-    public function test_pode_atualizar_um_assunto()
+    public function test_can_update_subject()
     {
         $assunto = Assunto::factory()->create();
         $novaDescricao = 'Novo Assunto';
@@ -33,7 +33,7 @@ class AssuntoCrudTest extends TestCase
         ]);
     }
 
-    public function test_pode_deletar_um_assunto()
+    public function test_can_delete_subject()
     {
         $assunto = Assunto::factory()->create();
 

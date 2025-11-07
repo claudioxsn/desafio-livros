@@ -17,12 +17,12 @@ class LivroService
         $this->livroRepository = $livroRepository;
     }
 
-    public function listarTodos()
+    public function listAll()
     {
         return $this->livroRepository->allWithRelations();
     }
 
-    public function listarTodosWithPagination($qtd = 10)
+    public function listAllWithPagination($qtd = 10)
     {
         return $this->livroRepository->allWithPagination($qtd);
     }
@@ -32,20 +32,20 @@ class LivroService
         return $this->livroRepository->buscarPorTituloComPagination($titulo, 8);
     }
 
-    public function buscarPorId($id)
+    public function findById($id)
     {
         try {
-            return $this->livroRepository->buscarPorId($id);
+            return $this->livroRepository->findById($id);
         } catch (ModelNotFoundException $e) {
             throw $e;
         }
     }
 
-    public function criar(array $dados)
+    public function create(array $dados)
     {
         try {
             return DB::transaction(function () use ($dados) {
-                $livro = $this->livroRepository->criar($dados);
+                $livro = $this->livroRepository->create($dados);
 
                 if (isset($dados['Livro_CodAu'])) {
                     $livro->autores()->sync($dados['Livro_CodAu']);
@@ -62,11 +62,11 @@ class LivroService
         }
     }
 
-    public function atualizar($id, array $dados)
+    public function update($id, array $dados)
     {
         try {
             return DB::transaction(function () use ($id, $dados) {
-                $livro = $this->livroRepository->atualizar($id, $dados);
+                $livro = $this->livroRepository->update($id, $dados);
 
                 if (isset($dados['Livro_CodAu'])) {
                     $livro->autores()->sync($dados['Livro_CodAu']);
@@ -83,10 +83,10 @@ class LivroService
         }
     }
 
-    public function deletar($id)
+    public function delete($id)
     {
         try {
-            return $this->livroRepository->deletar($id);
+            return $this->livroRepository->delete($id);
         } catch (DatabaseException $e) {
             throw $e;
         }

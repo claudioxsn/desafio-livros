@@ -17,57 +17,56 @@ class AssuntoService
         $this->assuntoRepository = $assuntoRepository;
     }
 
-
-    public function listarTodos()
+    public function listAll()
     {
         return $this->assuntoRepository->all();
     }
 
-    public function listarTodosWithPagination()
+    public function listAllWithPagination()
     {
         return $this->assuntoRepository->allWithPagination(8);
     }
 
-    public function listarPorNomeComPagination($nome)
+    public function findByNameWithPagination($nome)
     {
-        return $this->assuntoRepository->buscarPorDescricaoComPagination($nome, 8);
+        return $this->assuntoRepository->findByDescriptionWithPagination($nome, 8);
     }
 
-    public function buscarPorId($id)
+    public function findById($id)
     {
         try {
-            return $this->assuntoRepository->buscarPorId($id);
+            return $this->assuntoRepository->findById($id);
         } catch (ModelNotFoundException $e) {
             throw new ModelNotFoundException($e->getMessage());
         }
     }
 
-    public function criar(array $dados)
+    public function create(array $dados)
     {
         try {
             return DB::transaction(function () use ($dados) {
-                return $this->assuntoRepository->criar($dados);
+                return $this->assuntoRepository->create($dados);
             });
         } catch (DatabaseException $e) {
             throw $e;
         }
     }
 
-    public function atualizar($id, array $dados)
+    public function update($id, array $dados)
     {
         try {
             return DB::transaction(function () use ($id, $dados) {
-                return $this->assuntoRepository->atualizar($id, $dados);
+                return $this->assuntoRepository->update($id, $dados);
             });
         } catch (DatabaseException $e) {
             throw $e;
         }
     }
 
-    public function deletar($id)
+    public function delete($id)
     {
         try {
-            return $this->assuntoRepository->deletar($id);
+            return $this->assuntoRepository->delete($id);
         } catch (ModelNotFoundException | DatabaseException $e) {
             throw $e;
         }
