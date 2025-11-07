@@ -2,26 +2,41 @@
     <div class="mb-3 col-md-6">
         <label for="Titulo" class="form-label">Título</label>
         <input type="text" class="form-control" id="Titulo" wire:model="Titulo">
+        @error('Titulo')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
 
     <div class="mb-3 col-md-6">
         <label for="Editora" class="form-label">Editora</label>
         <input type="text" class="form-control" id="Editora" wire:model="Editora">
+         @error('Editora')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
     </div>
 
     <div class="mb-3 col-md-6">
         <label for="edicao" class="form-label">Edição</label>
         <input type="number" class="form-control" id="edicao" wire:model="Edicao">
+         @error('Edicao')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
     </div>
 
     <div class="mb-3 col-md-3">
         <label for="anoPublicacao" class="form-label">Ano de Publicação</label>
         <input type="number" class="form-control" id="anoPublicacao" wire:model="AnoPublicacao">
+         @error('AnoPublicacao')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
     </div>
 
     <div class="mb-3 col-md-3">
         <label for="valor" class="form-label">Valor</label>
         <input type="number" step="0.01" class="form-control" id="valor" wire:model="Valor">
+         @error('Valor')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
     </div>
     <div class="mb-3 col-md-6">
         <label for="livroCodAu" class="form-label">Autor</label>
@@ -30,6 +45,9 @@
                 <option value="{{ $autor->CodAu }}">{{ $autor->Nome }}</option>
             @endforeach
         </select>
+         @error('CodAu')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
     </div>
     <div class="mb-3 col-md-6">
         <label for="codAs" class="form-label">Assunto</label>
@@ -38,5 +56,8 @@
                 <option value="{{ $assunto->codAs }}">{{ $assunto->Descricao }}</option>
             @endforeach
         </select>
+         @error('codAs')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
     </div>
 </div>

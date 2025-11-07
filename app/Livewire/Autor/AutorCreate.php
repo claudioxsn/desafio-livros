@@ -13,7 +13,7 @@ class AutorCreate extends Component
     public $Nome;
 
     protected $rules = [
-        'Nome' => ['required', 'string', 'max:255']
+        'Nome' => ['required', 'string', 'max:40']
     ];
 
     protected $messages = [

@@ -18,7 +18,7 @@
         <!-- Seção de Busca -->
         <div class="d-flex justify-content-between align-items-center mb-3">
             <input class="form-control me-2" type="search" name="busca" placeholder="Buscar por nome"
-                aria-label="Buscar" wire:model.lazy='search'>
+                aria-label="Buscar" wire:model.live='search'>
             <button class="btn btn-outline-primary" type="submit">
                 <i class="bi bi-search"></i> Buscar
             </button>
@@ -54,7 +54,7 @@
                                             class="btn btn-info btn-sm">Editar</a>
                                         <!-- Botão de Exclusão -->
                                         <button class="btn btn-danger btn-sm" wire:click="delete({{ $autor->CodAu }})"
-                                            onclick="return confirm('Tem certeza que deseja excluir este autor?')">
+                                            onclick="return confirm('Tem certeza que deseja excluir?')">
                                             Excluir
                                         </button>
                                     </td>

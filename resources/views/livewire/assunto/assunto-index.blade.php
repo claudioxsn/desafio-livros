@@ -16,7 +16,7 @@
         @endif
 
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <input class="form-control me-2" placeholder="Buscar assunto" wire:model.lazy='search' aria-label="Buscar">
+            <input class="form-control me-2" placeholder="Buscar assunto" wire:model.live='search' aria-label="Buscar">
             <button class="btn btn-outline-primary" type="submit">Buscar</button>
         </div>
 
@@ -47,13 +47,16 @@
                                         <a href="{{ route('assunto.edit', ['codAs' => $assunto->codAs]) }}"
                                             class="btn btn-info btn-sm">Editar</a>
                                         <button href="#" class="btn btn-danger btn-sm"
-                                            wire:click='delete({{ $assunto->codAs }})'>Excluir</button>
+                                            wire:click='delete({{ $assunto->codAs }})'
+                                            onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $assuntos->links() }}
+                    <div class="d-flex justify-content-center">
+                        {{ $assuntos->links() }}
+                    </div>
                 </div>
             </div>
         </div>

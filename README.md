@@ -2,8 +2,9 @@
 Este projeto é um sistema de gerenciamento de livros, autores e assuntos. Ele foi desenvolvido como parte de um desafio técnico, com foco em:
 -   Boas práticas de arquitetura (Service + Repository)
 -   Organização em camadas   
--   Banco de dados relacional com uso de views, triggers e procedures
--   Interface via API e também Livewire (Web)
+-   Banco de dados relacional com uso de views (respeitando o projeto proposto)
+-   Endpoints de API
+-   Interface Web com Livewire
 -   Filtros, relações N:N e soft deletes.
 -   Testes
 
@@ -79,3 +80,5 @@ O projeto foi estruturado em camadas para garantir manutenção e separação de
 #### Executar seeders (opcional)
 - ./vendor/bin/sail artisan db:seed
 
+#### Acesso a documentação da API (Swagger)
+- /api/documentation

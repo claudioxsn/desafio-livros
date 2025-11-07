@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('Livro_Assunto', function (Blueprint $table) {
             $table->bigInteger('Livro_Codl')->unsigned();
             $table->bigInteger('Assunto_codAs')->unsigned();
-
             $table->foreign('Livro_Codl')->references('Codl')->on('Livro')->onDelete('cascade');
             $table->foreign('Assunto_codAs')->references('codAs')->on('Assunto')->onDelete('cascade');
-
             $table->primary(['Livro_Codl', 'Assunto_codAs']);
         });
     }

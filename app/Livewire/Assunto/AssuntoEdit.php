@@ -24,7 +24,7 @@ class AssuntoEdit extends Component
     }
 
     protected $rules = [
-        'Descricao' => ['required', 'string', 'max:255'],
+        'Descricao' => ['required', 'string', 'max:20'],
     ];
 
 
